@@ -1,0 +1,59 @@
+body {
+  background-color: #212121;
+  font-family: "Montserrat", system-ui;
+}
+
+a:link { 
+  text-decoration: none; 
+} 
+
+:is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 700;
+}
+
+#card {
+  max-width: 1024px;
+}
+
+#col-1 {
+  @media (min-width: 770px) {
+    max-width: 413px
+  }
+
+  ;
+}
+
+
+#col-2 * {
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 125%;
+
+  @media (max-width: 770px) {
+    font-size: 1rem;
+    margin-bottom: 1rem
+  }
+
+  ;
+}
+
+#buttons {
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.btn,
+a {
+  font-weight: 500;
+  @media (max-width: 770px) {
+    font-size: 0.85rem;
+  }
+}
+
+#character-name {
+  @media (max-width: 770px) {
+    text-align: center;
+  }
+
+  ;
+}
