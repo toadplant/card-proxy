@@ -3,9 +3,9 @@ body {
   font-family: "Montserrat", system-ui;
 }
 
-a:link { 
-  text-decoration: none; 
-} 
+a:link {
+  text-decoration: none;
+}
 
 :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 700;
@@ -13,9 +13,16 @@ a:link {
 
 #card {
   max-width: 1024px;
+
+  @media (max-width: 770px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 #col-1 {
+  padding: 0;
+
   @media (min-width: 770px) {
     max-width: 413px
   }
@@ -45,6 +52,7 @@ a:link {
 .btn,
 a {
   font-weight: 500;
+
   @media (max-width: 770px) {
     font-size: 0.85rem;
   }

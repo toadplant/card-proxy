@@ -20,20 +20,19 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
-<body class='text-light'>
-  <div id='card' class='container-md d-block mt-5'>
+<body class='text-light mt-4'>
+  <div id='card' class='container-fluid d-block'>
     <h1 id='character-name' class=''></h1>
-    <div class="row p-2">
-      <div id='col-1' class='row-flex justify-content-center p-0'>
-        <img id='avatar' class='img-fluid rounded position-relative top-0 start-50 translate-middle-x' src=''></img>
-
-        <div id='buttons' class='container-fluid d-block justify-content-center mb-4'>
+    <div class="row">
+      <div id='col-1' class='col-flex justify-content-center px-3'>
+        <img id='avatar' class='img-fluid rounded' src=''></img>
+        <div id='buttons' class='fill d-block justify-content-center mb-4'>
           <div class="input-group d-fluid">
             <input id="st-link" type="text" class="form-control text-light bg-transparent" disabled>
-            <button id="copyBtn"class="btn btn-outline-light" type="button" onclick="" id="inputGroupFileAddon04">Copy!</button>
+            <button id="copyBtn" class="btn btn-outline-light" type="button" onclick=""
+              id="inputGroupFileAddon04">Copy!</button>
           </div>
-          <div class="form-text text-light d-fluid pb-3" id="basic-addon4">
-            Use this link to import the card in SillyTavern!</div>
+          <div class="text-light d-fluid mb-3"><small>Use this link to import the card in SillyTavern!</small></div>
           <a id="agnai" type="button" class="btn d-flex btn-outline-light mb-2" target="_blank"><i
               class="bi bi-box-arrow-up-right me-2"></i>Import to Agnai</a>
           <a id="risu" type="button" class="btn d-flex btn-outline-light mb-2" target="_blank"><i
@@ -42,7 +41,7 @@
               class="bi bi-box-arrow-up-right me-2"></i>Open in C.ai</a>
         </div>
       </div>
-      <div id='col-2' class='col-md px-3'>
+      <div id='col-2' class='col px-3'>
         <p id="metadata" class="opacity-75" style="font-size: 0.8rem; "></p>
         <h5 id='tagline' class=''></h5>
         <h5 id='lorebooks' class=''><i class="bi bi-journal-bookmark-fill"></i>
@@ -54,7 +53,7 @@
   </div>
   </div>
   <footer class="">
-    <ul class="nav justify-content-center p-4 g-3">
+    <ul class="nav justify-content-center g-3">
       <li class="nav-item p-2">Made by Toadplant</a></li>
       <li class="nav-item p-2">For <a href="https://discord.gg/CUu8eTMZS9">AWR Discord</a></li>
       <li class="nav-item p-2">API Courtesy of <a href="https://github.com/CharHubAI/CharHub-API">Chub</a></li>
