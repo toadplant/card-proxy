@@ -30,6 +30,17 @@ a:link {
   ;
 }
 
+#avatar {
+  @media (max-width: 770px) {
+    width: 16rem;
+  }
+}
+
+#project-name {
+  @media (max-width: 770px) {
+    text-align: center;;
+  }
+}
 
 #col-2 * {
   margin-bottom: 20px;
