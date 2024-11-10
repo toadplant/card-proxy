@@ -1,11 +1,16 @@
 body {
   background-color: #212121;
   font-family: "Montserrat", system-ui;
+
+  @media (max-width: 770px) {
+    font-size: 0.8rem;
+  }
 }
 
 a:link {
   text-decoration: none;
 }
+
 
 :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 700;
@@ -15,8 +20,8 @@ a:link {
   max-width: 1024px;
 
   @media (max-width: 770px) {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 
@@ -38,18 +43,18 @@ a:link {
 
 #project-name {
   @media (max-width: 770px) {
-    text-align: center;;
+    text-align: center;
+    ;
   }
 }
 
 #col-2 * {
   margin-bottom: 20px;
-  font-size: 20px;
   line-height: 125%;
 
   @media (max-width: 770px) {
+    margin-bottom: 1rem;
     font-size: 1rem;
-    margin-bottom: 1rem
   }
 
   ;
@@ -60,12 +65,12 @@ a:link {
   margin-bottom: 4rem;
 }
 
-.btn,
-a {
+.btn, input {
   font-weight: 500;
+  font-size: 0.9rem;
 
   @media (max-width: 770px) {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 }
 

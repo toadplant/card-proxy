@@ -5,25 +5,28 @@ const path = urlParams.get('path');
 console.log(path)
 
 /// COPY LINK MESSAGE
-/*$("button#copyBtn").click(function () {
-    let value = $("input#st-link").val();
-
-    navigator.clipboard.writeText(value).then(function () {
-        alert('Copied! Use this link to import project in Silly Tavern');
-    }).catch(function (error) {
-        alert('Failed to copy: ' + error);
-    });
-});*/
-
-const toastTrigger = document.getElementById('copyBtn')
-const toastLiveExample = document.getElementById('liveToast')
+const toastTrigger = document.getElementById('copyBtn');
+const toastLiveExample = document.getElementById('liveToast');
+const inputElement = document.getElementById('st-link'); // Get the input element
 
 if (toastTrigger) {
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+  
   toastTrigger.addEventListener('click', () => {
-    toastBootstrap.show()
-  })
+    if (inputElement) {
+      // Copy text to clipboard
+      navigator.clipboard.writeText(inputElement.value)
+        .then(() => {
+          // Show toast notification on successful copy
+          toastBootstrap.show();
+        })
+        .catch((error) => {
+          console.error("Error copying text: ", error);
+        });
+    }
+  });
 }
+
 
 /// get project json
 async function fetchData() {
@@ -54,9 +57,9 @@ function downloadCard(format, fullPath, fileName) {
         type: "POST",
         contentType: 'application/json',
         data: JSON.stringify({
+            format: format,
             fullPath: fullPath,
-            version: "main",
-            format: format
+            version: "main"
         }),
         xhrFields: {
             responseType: responseType // Set response type based on the format
@@ -88,6 +91,50 @@ function downloadCard(format, fullPath, fileName) {
     });
 }
 
+function addButton(id, buttonText, href) {
+    let $button = $('<a>', {
+        html: '<i class="bi bi-box-arrow-up-right me-2"></i>' + buttonText,
+        id: id,
+        href: href,
+        class: "btn d-flex btn-outline-light my-2",
+        target: "_blank"
+    });
+    console.log("Button added");
+    return $button;
+}
+
+///processor fo links in description
+function stripChub(text) {
+    ///chub or character
+    return text.replaceAll(/(https?:\/\/(www\.)?)(characterhub|venus\.chub|chub)\.[a-z]{2,4}\b\//g, '?path=')
+}
+
+function addOuterLinks(definition) {
+    let janitorCheck = /\[(J|j)anitorai\]\((.*?)\)/g;
+    let wywernCheck = /\[(W|w)ywern\]\((.*?)\)/g;
+
+    function containsRegex(definition, regex) {
+        console.log("Checking for regex match");
+        return regex.test(definition);
+    }
+    
+    if (containsRegex(definition, janitorCheck)) {   
+        addButton("janitorai", "Open in Janitor.AI", definition.match(/(?<=\[(J|j)anitorai\]\().*?(?=\))/g)).appendTo($("div#outer-links"));
+    }
+    if (containsRegex(definition, wywernCheck)) { 
+        addButton("wywern", "Open in Wywern", definition.match(/(?<=\[(W|w)ywern\]\().*?(?=\))/g)).appendTo($("div#outer-links"));
+    }
+}
+
+function addCaiLink(node) {
+    if (node.some(label => label.title === "CAI")){
+        console.log(node.find(label => label.title === "CAI"))
+        let lable =  node.find(label => label.title === "CAI")
+        addButton("cai", "Open in C.ai", 
+            'https://character.ai/chat/' + lable.description).appendTo($("div#outer-links"));
+    }
+}
+
 
 // Call fetchData and set the fetched data to the outer variable
 fetchData().then((json) => {
@@ -106,7 +153,7 @@ fetchData().then((json) => {
     $('meta[property="og:image"]').attr('content', ("https://avatars.charhub.io/avatars/" + project.fullPath + "/chara_card_v2.png"));
     $('#project-name').text(project.name);
     $('p#metadata').text("Created by " + creator + " | Token size: " + project.nTokens + " | Last update: " + project.lastActivityAt.split("T", 1));
-    $('h5#tagline').text(project.tagline);
+    $('#tagline').text(project.tagline);
     $('p#tags').text(tags);
     console.log()
     $('input#st-link').attr('value', project.fullPath);
@@ -115,9 +162,9 @@ fetchData().then((json) => {
     if (project.projectSpace == 'characters') {
         $('img#avatar').attr('src', ("https://avatars.charhub.io/avatars/" + project.fullPath + "/chara_card_v2.png"));
         console.log("it's a character");
-        $('div#explainer').text("The file will contain the card of "+project.name+", all embedded and linked lorebooks")
-        $('a#lorebooks').text(json.nodes[Object.keys(json.nodes)[0]].tagline);
-        $('a#lorebooks').attr('href', '?path=' + json.nodes[Object.keys(json.nodes)[0]].fullPath);
+        $('div#explainer').text("Import will contain the card of "+project.name+", all embedded and linked lorebooks")
+        $('a#lorebooks').text(project.tagline);
+        $('a#lorebooks').attr('href', '?path=' + project.fullPath);
         $('a#agnai').attr('href', "https://agnai.chat/project/create?import=" + project.fullPath);
         $('a#risu').attr('href', "https://risuai.xyz/?charahub=" + project.fullPath);
         $('a#open-cai').attr('href', "https://character.ai/chat/" + project.labels[0].description);
@@ -138,19 +185,16 @@ fetchData().then((json) => {
         $('div#import-buttons').remove()
         $('#lorebooks').remove()
         $('a#get-png').remove()
+        $('#imports').text("Lorebooks download is unavailable 😞")
     } else {
         console.log("error");
     }
     $(document).ready(function () {
         console.log(project.description);
-        let changedText = project.description.replaceAll(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b\//g, '?path=');
-        console.log(changedText);
-
-        $('div#description').append(marked.parse(changedText));
+        $('div#description').append(marked.parse(stripChub(project.description)));
+        addOuterLinks(project.description);
+        addCaiLink(project.labels);
     });
     
     
 });
-
-/// use internal links for lorebooks and characters
-

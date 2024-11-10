@@ -26,37 +26,37 @@
     <div class="row">
       <div id='col-1' class='col-flex justify-content-center px-3'>
         <img id='avatar' class='img-fluid rounded mx-auto d-block' src=''></img>
-        <div id='buttons' class='fill d-block justify-content-center mb-4'>
-          <div class="row">
-            <div id="explainer" class="mb-2"></div>
-            <div class="col pe-1"><a id="get-json" type="button" class="btn d-flex btn-outline-light justify-content-center mb-2" target="_blank"><i
-                  class="bi bi-file-arrow-down me-2"></i>JSON</a></div>
-            <div class="col ps-1"><a id="get-png" type="button" class="btn d-flex btn-outline-light justify-content-center mb-2" target="_blank"><i
-                  class="bi bi-file-arrow-down me-2"></i>PNG</a></div>
+        <div id='imports' class='fill d-block justify-content-center mb-2'>
+          <div id="explainer" class="my-2">
           </div>
-          <div class="input-group d-fluid">
-            <input id="st-link" type="text" class="form-control text-light bg-transparent" disabled>
-            <button id="copyBtn" class="btn btn-outline-light" type="button" onclick=""
-              id="inputGroupFileAddon04">Copy!</button>
-          </div>
-          <div class="text-light d-fluid mb-3"><small>Use this link to import the card in SillyTavern!</small></div>
-
-          <div id="import-buttons">
-            <a id="agnai" type="button" class="btn d-flex btn-outline-light mb-2" target="_blank"><i
-                class="bi bi-box-arrow-up-right me-2"></i>Import to Agnai</a>
-            <a id="risu" type="button" class="btn d-flex btn-outline-light mb-2" target="_blank"><i
-                class="bi bi-box-arrow-up-right me-2"></i>Import to Risu</a>
-            <a id="open-cai" type="button" class="btn d-flex btn-outline-light" target="_blank"><i
-                class="bi bi-box-arrow-up-right me-2"></i>Open in C.ai</a>
+          <div class="row row-cols-4 g-2">
+            <div class="col"><a id="get-json" type="button" class="btn d-flex btn-outline-light justify-content-center"
+                target="_blank"><i class="bi bi-file-arrow-down me-2"></i>JSON</a></div>
+            <div class="col"><a id="get-png" type="button" class="btn d-flex btn-outline-light justify-content-center"
+                target="_blank"><i class="bi bi-file-arrow-down me-2"></i>PNG</a></div>
+            <div class="col"><a id="agnai" type="button" class="btn d-flex btn-outline-light justify-content-center"
+                target="_blank"><i class="bi bi-box-arrow-up-right me-2"></i>Agnai</a></div>
+            <div class="col"><a id="risu" type="button" class="btn d-flex btn-outline-light justify-content-center"
+                target="_blank"><i class="bi bi-box-arrow-up-right me-2"></i>Risu</a></div>
           </div>
         </div>
+        <div class="input-group d-fluid">
+          <input id="st-link" type="text" class="form-control text-light bg-transparent" disabled>
+          <button id="copyBtn" class="btn btn-outline-light" type="button" onclick=""
+            id="inputGroupFileAddon04">Copy!</button>
+        </div>
+        <div class="text-light d-fluid mb-3"><small>Use this link to import the card in SillyTavern!</small></div>
+        <div id="outer-links" class="col g-1"></div>
+
       </div>
       <div id='col-2' class='col px-3'>
         <p id="metadata" class="opacity-75" style="font-size: 0.8rem; "></p>
-        <h5 id='tagline' class=''></h5>
-        <h5 id='lorebooks' class=''><i class="bi bi-journal-bookmark-fill"></i>
+        <h4 id='tagline' class=''></h4>
+        <!-- <h5 id='lorebooks' class=''><i class="bi bi-journal-bookmark-fill"></i>
           Linked lorebooks: <a id='lorebooks' href=""></a></h5>
-        <p id='tags' class='opacity-75 fs-1rem' style="font-size: 0.8rem;"></p>
+          remove until JSON obejct fix-->
+        <!-- <p id='tags' class='opacity-75 fs-1rem' style="font-size: 0.8rem;"></p>
+         remove tags for now-->
         <div id="description" class="text-break"></div>
       </div>
     </div>
@@ -70,18 +70,20 @@
     </ul>
   </footer>
   </div>
-  <div class="toast-container top-0 start-50 translate-middle-x p-3">
+  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
     <div id="liveToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
-          The link was copied!
+          The link was copied! Use <i class="bi bi-cloud-download"></i>
+          Import from external URL function to port character
         </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
       </div>
     </div>
   </div>
-  
-  
+
+
 </body>
 <script src="script.js"></script>
 
