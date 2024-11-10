@@ -103,6 +103,15 @@ function addButton(id, buttonText, href) {
     return $button;
 }
 
+function addBadge(text, _class) {
+    let $span = $('<span>', {
+        class: _class,
+        text: text
+    });
+
+    return $span
+}
+
 ///processor fo links in description
 function stripChub(text) {
     ///chub or character
@@ -152,7 +161,7 @@ fetchData().then((json) => {
     $('meta[property="og:description"]').attr('content', (project.tagline));
     $('meta[property="og:image"]').attr('content', ("https://avatars.charhub.io/avatars/" + project.fullPath + "/chara_card_v2.png"));
     $('#project-name').text(project.name);
-    $('p#metadata').text("Created by " + creator + " | Token size: " + project.nTokens + " | Last update: " + project.lastActivityAt.split("T", 1));
+    $('p#metadata').html("Tokens: " + project.nTokens + "<br> Created by " + creator + "<br> Last update: " + project.lastActivityAt.split("T", 1));
     $('#tagline').text(project.tagline);
     $('p#tags').text(tags);
     console.log()
